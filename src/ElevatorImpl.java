@@ -1,7 +1,7 @@
 
 public class ElevatorImpl implements Runnable, ElevatorMovement{
 
-    final static Elevator elevator = Elevator.getElevator();
+    public final static Elevator elevator = Elevator.getElevator();
 
     @Override
     public void startMovingUp(Elevator elevator) {
@@ -53,6 +53,7 @@ public class ElevatorImpl implements Runnable, ElevatorMovement{
                 } else{
                     elevator.direction = Direction.STOP;
                 }
+                System.out.println(elevator.direction + " " + elevator.queueUp +  " " + elevator.queueDown + " " + elevator.targetFloor + " " + elevator.currentFloor + " " + elevator.startFloor + " " + elevator.endFloor);
 
                 if(elevator.queueUp.isEmpty() && elevator.queueDown.isEmpty()){
                     System.out.println("Static lift/ Idle lift");
@@ -68,11 +69,11 @@ public class ElevatorImpl implements Runnable, ElevatorMovement{
                         System.out.println("Going downwards");
                     }
                     if(elevator.currentFloor == elevator.targetFloor){
-                        if(elevator.queueDown.isEmpty() && elevator.queueDown.peek() == elevator.targetFloor){
+                        if((!elevator.queueDown.isEmpty()) && elevator.queueDown.peek() == elevator.targetFloor){
                             System.out.println("Reached " + elevator.targetFloor);
                             elevator.queueDown.poll();
                         }
-                        if(elevator.queueUp.isEmpty() && elevator.queueUp.peek() == elevator.targetFloor){
+                        if((!elevator.queueUp.isEmpty()) && elevator.queueUp.peek() == elevator.targetFloor){
                             System.out.println("Reached " + elevator.targetFloor);
                             elevator.queueUp.poll();
                         }
